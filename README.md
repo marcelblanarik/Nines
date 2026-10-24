@@ -1,5 +1,10 @@
 # nines
 
+> ### [Try it in your browser →](https://marcelblanarik.github.io/Nines/)
+>
+> Upload a model or build one by hand and see the availability you can promise. No install, and your model is never
+> uploaded.
+
 A dependency-aware SLO calculator. Describe a service as a graph of components and dependencies, give each an
 availability, and `nines` tells you:
 
@@ -12,7 +17,7 @@ availability, and `nines` tells you:
 It is a Go library and CLI, with the same core compiled to WebAssembly for a static web app (`web/`, your models never
 leave the browser).
 
-![The nines web app: a title, an upload card, a form to build a model by hand, and example buttons](docs/homepage.png)
+[![The nines web app: a title, an upload card, a form to build a model by hand, and example buttons](docs/homepage.png)](https://marcelblanarik.github.io/Nines/)
 
 ## Why not just multiply percentages?
 
