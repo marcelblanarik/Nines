@@ -33,7 +33,7 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
-/** Loads nines.wasm (the only network requests the app makes) and returns the typed core. */
+/** Loads nines.wasm (the only requests the app itself makes; the page's Umami script is separate) and returns the typed core. */
 export async function loadCore(): Promise<Core> {
   await loadScript("./wasm_exec.js");
   const go = new Go();

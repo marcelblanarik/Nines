@@ -9,8 +9,8 @@ availability, and `nines` tells you:
 - whether 99.95% is even possible, optionally with uncertainty;
 - a step-by-step derivation that a product or management audience can follow.
 
-It is a Go library and CLI, with the same core compiled to WebAssembly for a static web app (`web/`, nothing leaves
-the browser).
+It is a Go library and CLI, with the same core compiled to WebAssembly for a static web app (`web/`, your models never
+leave the browser).
 
 ![The nines web app: a title, an upload card, a form to build a model by hand, and example buttons](docs/homepage.png)
 
@@ -205,7 +205,10 @@ transient failures twice. Persistent failures are shared by every reference.
 `web/` is a static single-page app: a YAML editor, an interactive graph (Cytoscape with the dagre layout), a slider
 per component that recomputes live from the same Go core compiled to WebAssembly, and the step-by-step derivation.
 The whole model, plus any slider changes, lives in the URL fragment (deflate, then base64url), so a shared link
-reproduces the exact model and result. There is no backend and, after the initial load, no network requests.
+reproduces the exact model and result. There is no backend and your model is never sent anywhere. The hosted page
+counts visits with [Umami](https://umami.is) (no cookies; the fragment that holds a shared model and the query string
+are excluded, so only the page itself is counted), and after the initial load the app makes no other requests. To
+build without it, delete the Umami script tag in `web/index.html`.
 
 The page opens with a title and two ways in: upload a model file (choose it or drag it in; files over 512 KB are
 refused and invalid ones list their errors), or list your components in a form to get a service that needs all of
