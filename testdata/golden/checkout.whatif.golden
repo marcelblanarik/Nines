@@ -1,0 +1,9 @@
+change: remove db-replica
+change: set payments to 99.99% (was 99.9%)
+change: set auth to 99.99% (was 99.95%)
+
+             before       after        change         downtime change / 30d
+  computed   99.91%       99.908%      -0.0020 pp     +0.85 min
+  ceiling    99.93%       99.928%      -0.0020 pp     +0.85 min
+  verdict    infeasible   infeasible  
+warning: line 12: component "az-b" is never used

@@ -1,0 +1,9 @@
+checkout works 99.91% of the time because:
+
+- ALL of these must work: 99.91%
+  - self works: 99.98%
+  - auth works: 99.95%
+  - payments works, trying up to 3 times: 99.98%
+  - AT LEAST ONE of these must work: 99.999964%
+    - db-primary works (and so does az-a, which it depends on): 99.94%
+    - db-replica works (and so does az-b, which it depends on): 99.94%

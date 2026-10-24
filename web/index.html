@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>nines: dependency-aware SLO calculator</title>
+    <meta
+      name="description"
+      content="Describe a service as a graph of dependencies and find the availability you can promise. Runs entirely in your browser."
+    />
+    <script>
+      // Apply a saved theme before the first paint so the page never flashes the wrong one. Keep the key in step with THEME_KEY in main.ts.
+      try {
+        var saved = localStorage.getItem("nines-theme");
+        if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
+      } catch (e) {}
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1220'/%3E%3Crect x='5' y='13' width='4' height='14' rx='1.5' fill='%2338bdf8'/%3E%3Crect x='11' y='9' width='4' height='18' rx='1.5' fill='%2338bdf8'/%3E%3Crect x='17' y='5' width='4' height='22' rx='1.5' fill='%2338bdf8'/%3E%3Crect x='23' y='9' width='4' height='18' rx='1.5' fill='%23f87171'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="5" y="13" width="4" height="14" rx="1.5" />
+          <rect x="11" y="9" width="4" height="18" rx="1.5" />
+          <rect x="17" y="5" width="4" height="22" rx="1.5" />
+          <rect class="gap" x="23" y="9" width="4" height="18" rx="1.5" />
+        </svg>
+        <span class="wordmark">nines</span>
+        <span class="tagline">dependency-aware SLO calculator</span>
+      </div>
+      <div class="toolbar">
+        <div id="live" class="live" aria-hidden="true" hidden></div>
+        <button id="help-btn" type="button" class="btn ghost icon" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5M12 18h.01" /></svg>
+        </button>
+        <button id="theme" type="button" class="btn ghost icon" aria-label="Switch between light and dark theme" title="Switch theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="intro">
+      <h1>Dependency-aware <span>SLO calculator</span></h1>
+      <p class="lead">
+        Describe your service as a graph of dependencies and find the availability you can promise: the exact figure, the
+        single points of failure and the error budget. It runs in your browser and nothing is uploaded.
+      </p>
+    </section>
+
+    <main class="page">
+      <section id="start" class="start" aria-label="Provide a model"></section>
+
+      <section id="results" class="results" aria-label="Results" hidden>
+        <div class="results-bar">
+          <h2>Result</h2>
+          <div class="results-actions">
+            <label class="control toggle" title="Sample uncertain inputs and show the chance of meeting the target">
+              <input id="uncertainty" type="checkbox" />
+              <span>Uncertainty</span>
+            </label>
+            <button id="share" type="button" class="btn primary" title="Copy a link that reproduces this model and result">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7" /></svg>
+              <span id="share-label">Copy share link</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="answer" class="answer" tabindex="-1" aria-live="polite" aria-label="Result"></div>
+
+        <div class="canvas">
+          <div id="graph" class="graph" role="img" aria-label="Dependency graph"></div>
+          <div class="canvas-foot">
+            <div class="zoom" role="group" aria-label="Graph zoom">
+              <button id="zoom-in" type="button" class="btn icon" aria-label="Zoom in" title="Zoom in">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+              </button>
+              <button id="zoom-out" type="button" class="btn icon" aria-label="Zoom out" title="Zoom out">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" /></svg>
+              </button>
+              <button id="zoom-fit" type="button" class="btn icon" aria-label="Fit graph to view" title="Fit to view">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>
+              </button>
+            </div>
+            <ul class="legend" aria-label="Legend">
+              <li><i class="sw owned"></i>owned</li>
+              <li><i class="sw spof"></i>single point of failure</li>
+              <li><i class="sw gone"></i>removed in what-if</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="tiles"></div>
+
+        <div class="info-grid">
+          <div class="panel">
+            <header class="panel-head">
+              <h2>Components</h2>
+              <button id="reset" type="button" class="btn ghost small" title="Put every slider back and restore removed components">Reset what-ifs</button>
+            </header>
+            <details class="add-details">
+              <summary>Add a component</summary>
+              <div id="add"></div>
+            </details>
+            <p class="hint whatif-hint">Drag a slider to try a different availability, or remove a component. Edit changes the model itself.</p>
+            <div id="sliders" class="sliders"></div>
+          </div>
+          <div class="panel">
+            <header class="panel-head">
+              <h2>Model text</h2>
+              <span class="hint">edit it directly at any time</span>
+            </header>
+            <textarea id="editor" spellcheck="false" aria-label="Model YAML"></textarea>
+            <ul id="errors" class="errors" role="alert"></ul>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="panel">
+            <header class="panel-head"><h2>Findings</h2></header>
+            <div id="findings"></div>
+          </div>
+          <div class="panel">
+            <header class="panel-head"><h2>How it is derived</h2></header>
+            <div id="derivation" class="derivation"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Everything runs in your browser; nothing is sent anywhere. Results are an upper bound: real outages correlate.</footer>
+
+    <aside id="drawer" class="drawer" aria-labelledby="drawer-title" inert>
+      <header class="drawer-head">
+        <h2 id="drawer-title" tabindex="-1">Edit selected</h2>
+        <button id="drawer-close" type="button" class="btn ghost icon" aria-label="Close the editor" title="Close (Esc)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </header>
+      <div id="inspector" class="drawer-body"></div>
+    </aside>
+
+    <dialog id="help" class="help" aria-labelledby="help-title"></dialog>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

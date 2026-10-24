@@ -1,0 +1,18 @@
+service: three-tier-app
+target: 99.9
+window: 30d
+
+components:
+  lb:    {availability: 99.99, source: vendor-sla}
+  web-a: {availability: 99.9, owned: true}
+  web-b: {availability: 99.9, owned: true}
+  app-a: {availability: 99.9, owned: true}
+  app-b: {availability: 99.9, owned: true}
+  db:    {availability: 99.95, source: vendor-sla}
+
+requires:
+  all:
+    - lb
+    - any: [web-a, web-b]
+    - any: [app-a, app-b]
+    - db

@@ -1,0 +1,38 @@
+# checkout
+
+**Verdict: INFEASIBLE.** 99.95% is not possible: even if everything you own were perfect, dependencies cap you at 99.93%. Add redundancy to the dependencies or promise the 99.90% tier.
+
+| | Availability | Downtime per window |
+|---|---|---|
+| Target | 99.95% | 21.6 min |
+| Computed | 99.91% | 38.9 min |
+| Dependency ceiling | 99.93% | 30.3 min |
+
+Recommended tier: **99.90%**. Window: 30 days.
+
+## Biggest levers
+
+| Component | Availability | Gain if made perfect |
+|---|---|---|
+| auth | 99.95% | +0.0500 pp |
+| payments | 99.90% | +0.0200 pp |
+| self | 99.98% | +0.0200 pp |
+| db-primary | 99.95% | +0.0000 pp |
+| db-replica | 99.95% | +0.0000 pp |
+
+## Single points of failure
+
+- payments
+- auth
+- self
+
+## Pairs that take it down together
+
+- db-primary + db-replica
+- az-a + db-replica
+- db-primary + az-b
+- az-a + az-b
+
+## Warnings
+
+- payments is a single point of failure at 99.90%, below the 99.95% target

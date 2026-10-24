@@ -1,0 +1,14 @@
+service: bridge
+target: 97
+components:
+  A: {availability: 90}
+  B: {availability: 90}
+  C: {availability: 90}
+  D: {availability: 90}
+  E: {availability: 90}
+requires:
+  any:
+    - all: [A, D]
+    - all: [B, E]
+    - all: [A, C, E]
+    - all: [B, C, D]

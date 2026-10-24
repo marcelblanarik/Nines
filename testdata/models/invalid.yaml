@@ -1,0 +1,10 @@
+service: broken
+target: 99.9
+components:
+  a: {availability: 0.9995}
+  b: {availability: 99.9, group: nowhere}
+requires:
+  all:
+    - a
+    - missing
+    - k_of_n: {k: 3, of: [a, b]}

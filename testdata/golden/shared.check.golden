@@ -1,0 +1,18 @@
+shared-db
+
+  Target             99.00%  (432 min downtime / 30d)
+  Computed           98.01%  (860 min downtime / 30d)
+                     what naive multiplication would say: 98.81%
+  Dependency ceiling 99.00%  (432 min downtime / 30d, if everything you own were perfect)
+  Verdict            INFEASIBLE
+  Tier               below 99%
+
+Biggest levers (gain if made perfect):
+  1. a                    90.00%  +0.9900 pp  (428 min less downtime / 30d)
+  2. b                    90.00%  +0.9900 pp  (428 min less downtime / 30d)
+  3. db                   99.00%  +0.9900 pp  (428 min less downtime / 30d)
+
+Single points of failure: db
+Pairs that take it down together: a + b
+
+99.00% is not met (98.01% computed). The biggest lever is a. Improve it, add redundancy, or promise a target below 99%.

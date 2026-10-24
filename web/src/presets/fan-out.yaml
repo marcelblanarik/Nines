@@ -1,0 +1,49 @@
+# Twenty 99.9% dependencies in series give about 98.02%, not 99.9%.
+service: fan-out
+target: 99.9
+window: 30d
+
+components:
+  dep-01: {availability: 99.9}
+  dep-02: {availability: 99.9}
+  dep-03: {availability: 99.9}
+  dep-04: {availability: 99.9}
+  dep-05: {availability: 99.9}
+  dep-06: {availability: 99.9}
+  dep-07: {availability: 99.9}
+  dep-08: {availability: 99.9}
+  dep-09: {availability: 99.9}
+  dep-10: {availability: 99.9}
+  dep-11: {availability: 99.9}
+  dep-12: {availability: 99.9}
+  dep-13: {availability: 99.9}
+  dep-14: {availability: 99.9}
+  dep-15: {availability: 99.9}
+  dep-16: {availability: 99.9}
+  dep-17: {availability: 99.9}
+  dep-18: {availability: 99.9}
+  dep-19: {availability: 99.9}
+  dep-20: {availability: 99.9}
+
+requires:
+  all:
+    - dep-01
+    - dep-02
+    - dep-03
+    - dep-04
+    - dep-05
+    - dep-06
+    - dep-07
+    - dep-08
+    - dep-09
+    - dep-10
+    - dep-11
+    - dep-12
+    - dep-13
+    - dep-14
+    - dep-15
+    - dep-16
+    - dep-17
+    - dep-18
+    - dep-19
+    - dep-20

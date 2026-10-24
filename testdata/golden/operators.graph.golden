@@ -1,0 +1,39 @@
+flowchart TD
+  svc(["media-api"])
+  op1{{"all of"}}
+  c_self["self<br/>99.99%"]
+  c_authn["authn<br/>99.95%"]
+  op2{{"retry up to 3 times"}}
+  c_billing["billing<br/>99.5%"]
+  op3{{"2 of 3"}}
+  c_cdn_2d_a["cdn-a<br/>99.9%"]
+  c_cdn_2d_plane["cdn-plane<br/>99.99%"]
+  c_cdn_2d_b["cdn-b<br/>99.9%"]
+  c_cdn_2d_c["cdn-c<br/>99.9%"]
+  op4{{"cache, hit ratio 90%"}}
+  c_origin["origin<br/>99.9%"]
+  op5{{"optional, used by 20%"}}
+  c_search["search<br/>99%"]
+  op6{{"fallback, covers 60%"}}
+  c_recs["recs<br/>99%"]
+  c_legacy["legacy<br/>98%"]
+  op1 --> c_self
+  op1 --> c_authn
+  op2 --> c_billing
+  op1 --> op2
+  c_cdn_2d_a -.->|in group| c_cdn_2d_plane
+  op3 --> c_cdn_2d_a
+  c_cdn_2d_b -.->|in group| c_cdn_2d_plane
+  op3 --> c_cdn_2d_b
+  op3 --> c_cdn_2d_c
+  op1 --> op3
+  op4 -->|origin| c_origin
+  op1 --> op4
+  op5 --> c_search
+  op1 --> op5
+  op6 -->|primary| c_recs
+  op6 -->|fallback| c_legacy
+  op1 --> op6
+  svc --> op1
+  classDef owned stroke-width:3px
+  class c_self owned

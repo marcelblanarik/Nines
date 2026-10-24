@@ -1,0 +1,28 @@
+# shared-db
+
+**Verdict: INFEASIBLE.** 99.00% is not met (98.01% computed). The biggest lever is a. Improve it, add redundancy, or promise a target below 99%.
+
+| | Availability | Downtime per window |
+|---|---|---|
+| Target | 99.00% | 432 min |
+| Computed | 98.01% | 860 min |
+| Naive multiplication | 98.81% | 513 min |
+| Dependency ceiling | 99.00% | 432 min |
+
+Recommended tier: **below 99%**. Window: 30 days.
+
+## Biggest levers
+
+| Component | Availability | Gain if made perfect |
+|---|---|---|
+| a | 90.00% | +0.9900 pp |
+| b | 90.00% | +0.9900 pp |
+| db | 99.00% | +0.9900 pp |
+
+## Single points of failure
+
+- db
+
+## Pairs that take it down together
+
+- a + b

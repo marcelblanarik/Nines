@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "service": "media-api",
+  "target": 0.9990000000000001,
+  "window_days": 30,
+  "method": "bdd",
+  "bdd_nodes": 88,
+  "availability": 0.9925936952468244,
+  "naive": 0.9926925583713611,
+  "ceiling": 0.9926929645432788,
+  "verdict": "infeasible",
+  "tier": 0.99,
+  "levers": [
+    {
+      "component": "recs",
+      "availability": 0.99,
+      "owned": false,
+      "importance": 0.4106404410588539,
+      "improvement_potential": 0.0041064044105884046
+    },
+    {
+      "component": "search",
+      "availability": 0.99,
+      "owned": false,
+      "importance": 0.19891657219375225,
+      "improvement_potential": 0.0019891657219373027
+    },
+    {
+      "component": "billing",
+      "availability": 0.995,
+      "owned": false,
+      "importance": 0.9930903309982432,
+      "improvement_potential": 0.0004966357514187836
+    },
+    {
+      "component": "authn",
+      "availability": 0.9995,
+      "owned": false,
+      "importance": 0.9930902403670078,
+      "improvement_potential": 0.0004965451201833782
+    },
+    {
+      "component": "legacy",
+      "availability": 0.98,
+      "owned": false,
+      "importance": 0.005980200597944352,
+      "improvement_potential": 0.00011960401195887371
+    },
+    {
+      "component": "cdn-plane",
+      "availability": 0.9998999999999999,
+      "owned": false,
+      "importance": 0.9926929645432787,
+      "improvement_potential": 0.00009926929645431848
+    },
+    {
+      "component": "self",
+      "availability": 0.9998999999999999,
+      "owned": true,
+      "importance": 0.9926929645432787,
+      "improvement_potential": 0.00009926929645431848
+    },
+    {
+      "component": "origin",
+      "availability": 0.9990000000000001,
+      "owned": false,
+      "importance": 0.0992692964543278,
+      "improvement_potential": 0.00009926929645420746
+    },
+    {
+      "component": "cdn-b",
+      "availability": 0.9990000000000001,
+      "owned": false,
+      "importance": 0.001983208148760851,
+      "improvement_potential": 0.0000019832081487036746
+    },
+    {
+      "component": "cdn-c",
+      "availability": 0.9990000000000001,
+      "owned": false,
+      "importance": 0.001983208148760851,
+      "improvement_potential": 0.0000019832081487036746
+    },
+    {
+      "component": "cdn-a",
+      "availability": 0.9990000000000001,
+      "owned": false,
+      "importance": 0.001983208148760851,
+      "improvement_potential": 0.0000019832081485926523
+    }
+  ],
+  "spofs": [
+    "billing",
+    "authn",
+    "cdn-plane",
+    "self"
+  ],
+  "cut_sets": [
+    [
+      "recs",
+      "legacy"
+    ],
+    [
+      "cdn-a",
+      "cdn-b"
+    ],
+    [
+      "cdn-a",
+      "cdn-c"
+    ],
+    [
+      "cdn-b",
+      "cdn-c"
+    ]
+  ],
+  "warnings": [
+    "billing is a single point of failure at 99.50%, below the 99.90% target"
+  ],
+  "recommendation": "99.90% is not possible: even if everything you own were perfect, dependencies cap you at 99.269%. Add redundancy to the dependencies or promise the 99.00% tier."
+}

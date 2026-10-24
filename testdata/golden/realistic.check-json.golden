@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "service": "orders-api",
+  "target": 0.9995,
+  "window_days": 30,
+  "method": "bdd",
+  "bdd_nodes": 34,
+  "availability": 0.9990499098605238,
+  "naive": 0.9990499098605238,
+  "ceiling": 0.9991501744856262,
+  "verdict": "infeasible",
+  "tier": 0.999,
+  "levers": [
+    {
+      "component": "gateway",
+      "availability": 0.99945,
+      "owned": false,
+      "importance": 0.9995996896898531,
+      "improvement_potential": 0.0005497798293293554
+    },
+    {
+      "component": "payments",
+      "availability": 0.9990000000000001,
+      "owned": false,
+      "importance": 0.9992497603244092,
+      "improvement_potential": 0.00019985046388537597
+    },
+    {
+      "component": "self",
+      "availability": 0.9998999999999999,
+      "owned": true,
+      "importance": 0.9991498248430081,
+      "improvement_potential": 0.00009991498248429487
+    },
+    {
+      "component": "auth",
+      "availability": 0.9999,
+      "owned": false,
+      "importance": 0.999149824843008,
+      "improvement_potential": 0.00009991498248418385
+    },
+    {
+      "component": "db-primary",
+      "availability": 0.9995,
+      "owned": true,
+      "importance": 0.0005993202711407353,
+      "improvement_potential": 2.9966013548321513e-7
+    },
+    {
+      "component": "db-replica",
+      "availability": 0.9995,
+      "owned": true,
+      "importance": 0.0005993202711407353,
+      "improvement_potential": 2.9966013548321513e-7
+    },
+    {
+      "component": "az-a",
+      "availability": 0.9998999999999999,
+      "owned": false,
+      "importance": 0.0005990805190571047,
+      "improvement_potential": 5.99080518526307e-8
+    },
+    {
+      "component": "az-b",
+      "availability": 0.9998999999999999,
+      "owned": false,
+      "importance": 0.0005990805190569937,
+      "improvement_potential": 5.99080517416084e-8
+    }
+  ],
+  "spofs": [
+    "payments",
+    "gateway",
+    "self",
+    "auth"
+  ],
+  "cut_sets": [
+    [
+      "db-primary",
+      "db-replica"
+    ],
+    [
+      "az-a",
+      "db-replica"
+    ],
+    [
+      "db-primary",
+      "az-b"
+    ],
+    [
+      "az-a",
+      "az-b"
+    ]
+  ],
+  "warnings": [
+    "payments is a single point of failure at 99.90%, below the 99.95% target",
+    "gateway is a single point of failure at 99.945%, below the 99.95% target"
+  ],
+  "recommendation": "99.95% is not possible: even if everything you own were perfect, dependencies cap you at 99.915%. Add redundancy to the dependencies or promise the 99.90% tier."
+}

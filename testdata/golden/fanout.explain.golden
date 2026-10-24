@@ -1,0 +1,23 @@
+fan-out works 98.02% of the time because:
+
+- ALL of these must work: 98.02%
+  - dep-01 works: 99.90%
+  - dep-02 works: 99.90%
+  - dep-03 works: 99.90%
+  - dep-04 works: 99.90%
+  - dep-05 works: 99.90%
+  - dep-06 works: 99.90%
+  - dep-07 works: 99.90%
+  - dep-08 works: 99.90%
+  - dep-09 works: 99.90%
+  - dep-10 works: 99.90%
+  - dep-11 works: 99.90%
+  - dep-12 works: 99.90%
+  - dep-13 works: 99.90%
+  - dep-14 works: 99.90%
+  - dep-15 works: 99.90%
+  - dep-16 works: 99.90%
+  - dep-17 works: 99.90%
+  - dep-18 works: 99.90%
+  - dep-19 works: 99.90%
+  - dep-20 works: 99.90%

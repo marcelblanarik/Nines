@@ -1,0 +1,40 @@
+# orders-api
+
+**Verdict: INFEASIBLE.** 99.95% is not possible: even if everything you own were perfect, dependencies cap you at 99.915%. Add redundancy to the dependencies or promise the 99.90% tier.
+
+| | Availability | Downtime per window |
+|---|---|---|
+| Target | 99.95% | 21.6 min |
+| Computed | 99.905% | 41.0 min |
+| Dependency ceiling | 99.915% | 36.7 min |
+
+Recommended tier: **99.90%**. Window: 30 days.
+
+## Biggest levers
+
+| Component | Availability | Gain if made perfect |
+|---|---|---|
+| gateway | 99.945% | +0.0550 pp |
+| payments | 99.90% | +0.0200 pp |
+| self | 99.99% | +0.0100 pp |
+| auth | 99.99% | +0.0100 pp |
+| db-primary | 99.95% | +0.0000 pp |
+
+## Single points of failure
+
+- payments
+- gateway
+- self
+- auth
+
+## Pairs that take it down together
+
+- db-primary + db-replica
+- az-a + db-replica
+- db-primary + az-b
+- az-a + az-b
+
+## Warnings
+
+- payments is a single point of failure at 99.90%, below the 99.95% target
+- gateway is a single point of failure at 99.945%, below the 99.95% target

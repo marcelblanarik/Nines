@@ -1,0 +1,30 @@
+# bridge
+
+**Verdict: ACHIEVABLE.** 97.00% is achievable; it uses 72% of the error budget. You could promise a target below 99%.
+
+| | Availability | Downtime per window |
+|---|---|---|
+| Target | 97.00% | 1296 min |
+| Computed | 97.85% | 930 min |
+| Naive multiplication | 99.735% | 115 min |
+
+Recommended tier: **below 99%**. Window: 30 days.
+
+## Biggest levers
+
+| Component | Availability | Gain if made perfect |
+|---|---|---|
+| A | 90.00% | +1.0620 pp |
+| B | 90.00% | +1.0620 pp |
+| D | 90.00% | +1.0620 pp |
+| E | 90.00% | +1.0620 pp |
+| C | 90.00% | +0.1620 pp |
+
+## Single points of failure
+
+None.
+
+## Pairs that take it down together
+
+- A + B
+- D + E

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "service": "checkout",
+  "target": 0.9995,
+  "window_days": 30,
+  "method": "bdd",
+  "bdd_nodes": 29,
+  "availability": 0.9990998798520111,
+  "naive": 0.9990998798520111,
+  "ceiling": 0.9992997397999711,
+  "verdict": "infeasible",
+  "tier": 0.999,
+  "levers": [
+    {
+      "component": "auth",
+      "availability": 0.9995,
+      "owned": false,
+      "importance": 0.9995996796918569,
+      "improvement_potential": 0.000499799839845827
+    },
+    {
+      "component": "payments",
+      "availability": 0.9990000000000001,
+      "owned": false,
+      "importance": 0.9992997403119197,
+      "improvement_potential": 0.00019986045990860735
+    },
+    {
+      "component": "self",
+      "availability": 0.9998,
+      "owned": true,
+      "importance": 0.9992997397999711,
+      "improvement_potential": 0.00019985994796001272
+    },
+    {
+      "component": "db-primary",
+      "availability": 0.9995,
+      "owned": false,
+      "importance": 0.0005993502476502321,
+      "improvement_potential": 2.996751238271145e-7
+    },
+    {
+      "component": "db-replica",
+      "availability": 0.9995,
+      "owned": false,
+      "importance": 0.0005993502476501211,
+      "improvement_potential": 2.9967512371609217e-7
+    },
+    {
+      "component": "az-a",
+      "availability": 0.9998999999999999,
+      "owned": false,
+      "importance": 0.0005991104835747496,
+      "improvement_potential": 5.991104834457417e-8
+    },
+    {
+      "component": "az-b",
+      "availability": 0.9998999999999999,
+      "owned": false,
+      "importance": 0.0005991104835746386,
+      "improvement_potential": 5.991104823355187e-8
+    }
+  ],
+  "spofs": [
+    "payments",
+    "auth",
+    "self"
+  ],
+  "cut_sets": [
+    [
+      "db-primary",
+      "db-replica"
+    ],
+    [
+      "az-a",
+      "db-replica"
+    ],
+    [
+      "db-primary",
+      "az-b"
+    ],
+    [
+      "az-a",
+      "az-b"
+    ]
+  ],
+  "warnings": [
+    "payments is a single point of failure at 99.90%, below the 99.95% target"
+  ],
+  "recommendation": "99.95% is not possible: even if everything you own were perfect, dependencies cap you at 99.93%. Add redundancy to the dependencies or promise the 99.90% tier."
+}

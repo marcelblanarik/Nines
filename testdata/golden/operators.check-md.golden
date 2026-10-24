@@ -1,0 +1,40 @@
+# media-api
+
+**Verdict: INFEASIBLE.** 99.90% is not possible: even if everything you own were perfect, dependencies cap you at 99.269%. Add redundancy to the dependencies or promise the 99.00% tier.
+
+| | Availability | Downtime per window |
+|---|---|---|
+| Target | 99.90% | 43.2 min |
+| Computed | 99.259% | 320 min |
+| Naive multiplication | 99.269% | 316 min |
+| Dependency ceiling | 99.269% | 316 min |
+
+Recommended tier: **99.00%**. Window: 30 days.
+
+## Biggest levers
+
+| Component | Availability | Gain if made perfect |
+|---|---|---|
+| recs | 99.00% | +0.4106 pp |
+| search | 99.00% | +0.1989 pp |
+| billing | 99.50% | +0.0497 pp |
+| authn | 99.95% | +0.0497 pp |
+| legacy | 98.00% | +0.0120 pp |
+
+## Single points of failure
+
+- billing
+- authn
+- cdn-plane
+- self
+
+## Pairs that take it down together
+
+- recs + legacy
+- cdn-a + cdn-b
+- cdn-a + cdn-c
+- cdn-b + cdn-c
+
+## Warnings
+
+- billing is a single point of failure at 99.50%, below the 99.90% target

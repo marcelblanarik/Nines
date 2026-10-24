@@ -1,0 +1,19 @@
+service: checkout
+target: 99.95          # percent
+window: 30d
+
+components:
+  self:       {availability: 99.98, owned: true}
+  auth:       {availability: 99.95, source: measured}
+  payments:   {availability: 99.90, source: vendor-sla, transient_fraction: 0.8}
+  db-primary: {availability: 99.95, group: az-a}
+  db-replica: {availability: 99.95, group: az-b}
+  az-a:       {availability: 99.99}
+  az-b:       {availability: 99.99}
+
+requires:
+  all:
+    - self
+    - auth
+    - retry: {of: payments, attempts: 3}
+    - any: [db-primary, db-replica]

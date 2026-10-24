@@ -1,0 +1,19 @@
+flowchart TD
+  svc(["shared-db"])
+  op1{{"all of"}}
+  op2{{"any of"}}
+  op3{{"all of"}}
+  c_a["a<br/>90%"]
+  c_db["db<br/>99%"]
+  op4{{"all of"}}
+  c_b["b<br/>90%"]
+  op3 --> c_a
+  op3 --> c_db
+  op2 --> op3
+  op4 --> c_b
+  op4 --> c_db
+  op2 --> op4
+  op1 --> op2
+  svc --> op1
+  classDef owned stroke-width:3px
+  class c_a,c_b owned

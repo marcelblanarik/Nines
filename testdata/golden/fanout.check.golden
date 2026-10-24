@@ -1,0 +1,18 @@
+fan-out
+
+  Target             99.90%  (43.2 min downtime / 30d)
+  Computed           98.02%  (856 min downtime / 30d)
+  Dependency ceiling not computed: no component is marked owned: true
+  Verdict            INFEASIBLE
+  Tier               below 99%
+
+Biggest levers (gain if made perfect):
+  1. dep-01               99.90%  +0.0981 pp  (42.4 min less downtime / 30d)
+  2. dep-02               99.90%  +0.0981 pp  (42.4 min less downtime / 30d)
+  3. dep-03               99.90%  +0.0981 pp  (42.4 min less downtime / 30d)
+  4. dep-04               99.90%  +0.0981 pp  (42.4 min less downtime / 30d)
+  5. dep-05               99.90%  +0.0981 pp  (42.4 min less downtime / 30d)
+
+Single points of failure: dep-01, dep-02, dep-03, dep-04, dep-05, dep-06, dep-07, dep-08, dep-09, dep-10 and 10 more
+
+99.90% is not met (98.02% computed). The biggest lever is dep-01. Improve it, add redundancy, or promise a target below 99%.

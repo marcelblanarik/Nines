@@ -1,0 +1,20 @@
+bridge
+
+  Target             97.00%  (1296 min downtime / 30d)
+  Computed           97.85%  (930 min downtime / 30d)
+                     what naive multiplication would say: 99.735%
+  Dependency ceiling not computed: no component is marked owned: true
+  Verdict            ACHIEVABLE
+  Tier               below 99%
+
+Biggest levers (gain if made perfect):
+  1. A                    90.00%  +1.0620 pp  (459 min less downtime / 30d)
+  2. B                    90.00%  +1.0620 pp  (459 min less downtime / 30d)
+  3. D                    90.00%  +1.0620 pp  (459 min less downtime / 30d)
+  4. E                    90.00%  +1.0620 pp  (459 min less downtime / 30d)
+  5. C                    90.00%  +0.1620 pp  (70.0 min less downtime / 30d)
+
+Single points of failure: none
+Pairs that take it down together: A + B; D + E
+
+97.00% is achievable; it uses 72% of the error budget. You could promise a target below 99%.

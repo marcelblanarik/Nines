@@ -1,0 +1,9 @@
+/bin/
+/dist/
+.omc/
+.claude/
+.DS_Store
+node_modules/
+web/dist/
+web/public/nines.wasm
+web/public/wasm_exec.js

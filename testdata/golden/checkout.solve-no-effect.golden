@@ -1,0 +1,1 @@
+Even a perfect db-primary is not enough for 99.95%: the system would reach 99.91%. That is the ceiling set by everything else.

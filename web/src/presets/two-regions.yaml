@@ -1,0 +1,23 @@
+# Active/active across two regions. Each stack lives in its region, and both
+# depend on one global control plane, which is the shared fate to watch.
+service: global-api
+target: 99.99
+window: 30d
+
+components:
+  dns:           {availability: 99.99, source: vendor-sla}
+  control-plane: {availability: 99.99, source: vendor-sla}
+  region-a:      {availability: 99.95}
+  region-b:      {availability: 99.95}
+  api-a:         {availability: 99.95, owned: true, group: region-a}
+  api-b:         {availability: 99.95, owned: true, group: region-b}
+  db-a:          {availability: 99.95, group: region-a}
+  db-b:          {availability: 99.95, group: region-b}
+
+requires:
+  all:
+    - dns
+    - control-plane
+    - any:
+        - all: [api-a, db-a]
+        - all: [api-b, db-b]

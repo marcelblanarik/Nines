@@ -1,0 +1,18 @@
+bridge works 97.85% of the time because:
+
+- AT LEAST ONE of these must work: 97.85%
+  (shared components: A, B, C, D, E. The parts below are not independent, so this is the exact value, not a product of them.)
+  - ALL of these must work: 81.00%
+    - A works: 90.00%
+    - D works: 90.00%
+  - ALL of these must work: 81.00%
+    - B works: 90.00%
+    - E works: 90.00%
+  - ALL of these must work: 72.90%
+    - A works: 90.00%
+    - C works: 90.00%
+    - E works: 90.00%
+  - ALL of these must work: 72.90%
+    - B works: 90.00%
+    - C works: 90.00%
+    - D works: 90.00%

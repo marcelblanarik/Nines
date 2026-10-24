@@ -1,0 +1,26 @@
+service: media-api
+target: 99.9
+window: 30d
+
+components:
+  self:    {availability: 99.99, owned: true}
+  authn:   {availability: 99.95, source: measured}
+  billing: {availability: 99.5, source: vendor-sla, transient_fraction: 0.9}
+  origin:  {availability: 99.9}
+  cdn-a:   {availability: 99.9, group: cdn-plane}
+  cdn-b:   {availability: 99.9, group: cdn-plane}
+  cdn-c:   {availability: 99.9}
+  cdn-plane: {availability: 99.99}
+  search:  {availability: 99.0}
+  legacy:  {availability: 98.0}
+  recs:    {availability: 99.0}
+
+requires:
+  all:
+    - self
+    - authn
+    - retry: {of: billing, attempts: 3}
+    - k_of_n: {k: 2, of: [cdn-a, cdn-b, cdn-c]}
+    - cached: {of: origin, hit_ratio: 0.9}
+    - optional: {of: search, touch: 0.2}
+    - fallback: {primary: recs, fallback: legacy, coverage: 0.6}

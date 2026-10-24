@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "service": "bridge",
+  "target": 0.97,
+  "window_days": 30,
+  "method": "bdd",
+  "bdd_nodes": 23,
+  "availability": 0.97848,
+  "naive": 0.9973487799,
+  "ceiling": null,
+  "verdict": "achievable",
+  "tier": null,
+  "levers": [
+    {
+      "component": "A",
+      "availability": 0.9,
+      "owned": false,
+      "importance": 0.10619999999999996,
+      "improvement_potential": 0.010619999999999963
+    },
+    {
+      "component": "B",
+      "availability": 0.9,
+      "owned": false,
+      "importance": 0.10619999999999996,
+      "improvement_potential": 0.010619999999999963
+    },
+    {
+      "component": "D",
+      "availability": 0.9,
+      "owned": false,
+      "importance": 0.10619999999999996,
+      "improvement_potential": 0.010619999999999963
+    },
+    {
+      "component": "E",
+      "availability": 0.9,
+      "owned": false,
+      "importance": 0.10619999999999996,
+      "improvement_potential": 0.010619999999999963
+    },
+    {
+      "component": "C",
+      "availability": 0.9,
+      "owned": false,
+      "importance": 0.016199999999999992,
+      "improvement_potential": 0.0016199999999999548
+    }
+  ],
+  "spofs": [],
+  "cut_sets": [
+    [
+      "A",
+      "B"
+    ],
+    [
+      "D",
+      "E"
+    ]
+  ],
+  "warnings": [],
+  "recommendation": "97.00% is achievable; it uses 72% of the error budget. You could promise a target below 99%."
+}

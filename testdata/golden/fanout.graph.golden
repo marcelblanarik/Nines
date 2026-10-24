@@ -1,0 +1,44 @@
+flowchart TD
+  svc(["fan-out"])
+  op1{{"all of"}}
+  c_dep_2d_01["dep-01<br/>99.9%"]
+  c_dep_2d_02["dep-02<br/>99.9%"]
+  c_dep_2d_03["dep-03<br/>99.9%"]
+  c_dep_2d_04["dep-04<br/>99.9%"]
+  c_dep_2d_05["dep-05<br/>99.9%"]
+  c_dep_2d_06["dep-06<br/>99.9%"]
+  c_dep_2d_07["dep-07<br/>99.9%"]
+  c_dep_2d_08["dep-08<br/>99.9%"]
+  c_dep_2d_09["dep-09<br/>99.9%"]
+  c_dep_2d_10["dep-10<br/>99.9%"]
+  c_dep_2d_11["dep-11<br/>99.9%"]
+  c_dep_2d_12["dep-12<br/>99.9%"]
+  c_dep_2d_13["dep-13<br/>99.9%"]
+  c_dep_2d_14["dep-14<br/>99.9%"]
+  c_dep_2d_15["dep-15<br/>99.9%"]
+  c_dep_2d_16["dep-16<br/>99.9%"]
+  c_dep_2d_17["dep-17<br/>99.9%"]
+  c_dep_2d_18["dep-18<br/>99.9%"]
+  c_dep_2d_19["dep-19<br/>99.9%"]
+  c_dep_2d_20["dep-20<br/>99.9%"]
+  op1 --> c_dep_2d_01
+  op1 --> c_dep_2d_02
+  op1 --> c_dep_2d_03
+  op1 --> c_dep_2d_04
+  op1 --> c_dep_2d_05
+  op1 --> c_dep_2d_06
+  op1 --> c_dep_2d_07
+  op1 --> c_dep_2d_08
+  op1 --> c_dep_2d_09
+  op1 --> c_dep_2d_10
+  op1 --> c_dep_2d_11
+  op1 --> c_dep_2d_12
+  op1 --> c_dep_2d_13
+  op1 --> c_dep_2d_14
+  op1 --> c_dep_2d_15
+  op1 --> c_dep_2d_16
+  op1 --> c_dep_2d_17
+  op1 --> c_dep_2d_18
+  op1 --> c_dep_2d_19
+  op1 --> c_dep_2d_20
+  svc --> op1

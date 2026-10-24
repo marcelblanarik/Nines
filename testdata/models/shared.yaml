@@ -1,0 +1,11 @@
+service: shared-db
+target: 99
+components:
+  a:  {availability: 90, owned: true}
+  b:  {availability: 90, owned: true}
+  db: {availability: 99}
+requires:
+  all:
+    - any:
+        - all: [a, db]
+        - all: [b, db]

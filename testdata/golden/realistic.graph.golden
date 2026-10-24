@@ -1,0 +1,26 @@
+flowchart TD
+  svc(["orders-api"])
+  op1{{"all of"}}
+  c_self["self<br/>99.99%"]
+  c_gateway["gateway<br/>99.9-99.99%"]
+  c_auth["auth<br/>99.99%"]
+  op2{{"any of"}}
+  c_db_2d_primary["db-primary<br/>99.95%"]
+  c_az_2d_a["az-a<br/>99.99%"]
+  c_db_2d_replica["db-replica<br/>99.95%"]
+  c_az_2d_b["az-b<br/>99.99%"]
+  op3{{"retry up to 3 times"}}
+  c_payments["payments<br/>99.85-99.95%"]
+  op1 --> c_self
+  op1 --> c_gateway
+  op1 --> c_auth
+  c_db_2d_primary -.->|in group| c_az_2d_a
+  op2 --> c_db_2d_primary
+  c_db_2d_replica -.->|in group| c_az_2d_b
+  op2 --> c_db_2d_replica
+  op1 --> op2
+  op3 --> c_payments
+  op1 --> op3
+  svc --> op1
+  classDef owned stroke-width:3px
+  class c_self,c_db_2d_primary,c_db_2d_replica owned

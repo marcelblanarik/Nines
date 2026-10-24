@@ -1,0 +1,23 @@
+orders-api
+
+  Target             99.95%  (21.6 min downtime / 30d)
+  Computed           99.905%  (41.0 min downtime / 30d)
+  Dependency ceiling 99.915%  (36.7 min downtime / 30d, if everything you own were perfect)
+  Verdict            INFEASIBLE
+  Uncertainty        mean 99.905%, p5 99.863%, p50 99.9045%, p95 99.9467%  (10000 samples, seed 7)
+  P(meets target)    2.8%
+  Tier               99.50%
+
+Biggest levers (gain if made perfect):
+  1. gateway              99.945%  +0.0550 pp  (23.8 min less downtime / 30d)
+  2. payments             99.90%  +0.0200 pp  (8.6 min less downtime / 30d)
+  3. self                 99.99%  +0.0100 pp  (4.3 min less downtime / 30d)
+  4. auth                 99.99%  +0.0100 pp  (4.3 min less downtime / 30d)
+  5. db-primary           99.95%  +0.0000 pp  (0.01 min less downtime / 30d)
+
+Single points of failure: payments, gateway, self, auth
+Pairs that take it down together: db-primary + db-replica; az-a + db-replica; db-primary + az-b; az-a + az-b
+warning: payments is a single point of failure at 99.90%, below the 99.95% target
+warning: gateway is a single point of failure at 99.945%, below the 99.95% target
+
+99.95% is not possible: even if everything you own were perfect, dependencies cap you at 99.915%. Add redundancy to the dependencies or promise the 99.50% tier.

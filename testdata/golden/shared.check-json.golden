@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "service": "shared-db",
+  "target": 0.99,
+  "window_days": 30,
+  "method": "bdd",
+  "bdd_nodes": 8,
+  "availability": 0.9801,
+  "naive": 0.988119,
+  "ceiling": 0.99,
+  "verdict": "infeasible",
+  "tier": null,
+  "levers": [
+    {
+      "component": "a",
+      "availability": 0.9,
+      "owned": true,
+      "importance": 0.09899999999999998,
+      "improvement_potential": 0.00990000000000002
+    },
+    {
+      "component": "b",
+      "availability": 0.9,
+      "owned": true,
+      "importance": 0.09899999999999998,
+      "improvement_potential": 0.00990000000000002
+    },
+    {
+      "component": "db",
+      "availability": 0.99,
+      "owned": false,
+      "importance": 0.99,
+      "improvement_potential": 0.00990000000000002
+    }
+  ],
+  "spofs": [
+    "db"
+  ],
+  "cut_sets": [
+    [
+      "a",
+      "b"
+    ]
+  ],
+  "warnings": [],
+  "recommendation": "99.00% is not met (98.01% computed). The biggest lever is a. Improve it, add redundancy, or promise a target below 99%."
+}

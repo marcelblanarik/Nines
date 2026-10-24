@@ -1,0 +1,23 @@
+checkout
+
+  Target             99.95%  (21.6 min downtime / 30d)
+  Computed           99.91%  (38.9 min downtime / 30d)
+  Dependency ceiling 99.93%  (30.3 min downtime / 30d, if everything you own were perfect)
+  Verdict            INFEASIBLE
+  Uncertainty        mean 99.91%, p5 99.91%, p50 99.91%, p95 99.91%  (10000 samples, seed 7)
+  P(meets target)    0.0%
+  Tier               99.90%
+
+Biggest levers (gain if made perfect):
+  1. auth                 99.95%  +0.0500 pp  (21.6 min less downtime / 30d)
+  2. payments             99.90%  +0.0200 pp  (8.6 min less downtime / 30d)
+  3. self                 99.98%  +0.0200 pp  (8.6 min less downtime / 30d)
+  4. db-primary           99.95%  +0.0000 pp  (0.01 min less downtime / 30d)
+  5. db-replica           99.95%  +0.0000 pp  (0.01 min less downtime / 30d)
+
+Single points of failure: payments, auth, self
+Pairs that take it down together: db-primary + db-replica; az-a + db-replica; db-primary + az-b; az-a + az-b
+warning: payments is a single point of failure at 99.90%, below the 99.95% target
+warning: no component has an interval or counts, so the uncertainty run has nothing to vary; enter vendor SLAs as intervals with a pessimistic lower end
+
+99.95% is not possible: even if everything you own were perfect, dependencies cap you at 99.93%. Add redundancy to the dependencies or promise the 99.90% tier.

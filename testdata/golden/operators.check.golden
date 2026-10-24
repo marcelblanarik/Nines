@@ -1,0 +1,21 @@
+media-api
+
+  Target             99.90%  (43.2 min downtime / 30d)
+  Computed           99.259%  (320 min downtime / 30d)
+                     what naive multiplication would say: 99.269%
+  Dependency ceiling 99.269%  (316 min downtime / 30d, if everything you own were perfect)
+  Verdict            INFEASIBLE
+  Tier               99.00%
+
+Biggest levers (gain if made perfect):
+  1. recs                 99.00%  +0.4106 pp  (177 min less downtime / 30d)
+  2. search               99.00%  +0.1989 pp  (85.9 min less downtime / 30d)
+  3. billing              99.50%  +0.0497 pp  (21.5 min less downtime / 30d)
+  4. authn                99.95%  +0.0497 pp  (21.5 min less downtime / 30d)
+  5. legacy               98.00%  +0.0120 pp  (5.2 min less downtime / 30d)
+
+Single points of failure: billing, authn, cdn-plane, self
+Pairs that take it down together: recs + legacy; cdn-a + cdn-b; cdn-a + cdn-c; cdn-b + cdn-c
+warning: billing is a single point of failure at 99.50%, below the 99.90% target
+
+99.90% is not possible: even if everything you own were perfect, dependencies cap you at 99.269%. Add redundancy to the dependencies or promise the 99.00% tier.

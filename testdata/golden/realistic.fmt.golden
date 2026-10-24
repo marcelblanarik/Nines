@@ -1,0 +1,21 @@
+service: orders-api
+target: 99.95
+window: 30d
+components:
+    self: {availability: 99.99, owned: true}
+    gateway: {availability: {interval: [99.9, 99.99]}, source: vendor-sla}
+    auth: {availability: {counts: {good: 2999700, total: 3000000}}, source: measured}
+    db-primary: {availability: 99.95, owned: true, group: az-a}
+    db-replica: {availability: 99.95, owned: true, group: az-b}
+    az-a: {availability: 99.99}
+    az-b: {availability: 99.99}
+    payments: {availability: {interval: [99.85, 99.95]}, source: vendor-sla, transient_fraction: 0.8}
+requires:
+    all:
+        - self
+        - gateway
+        - auth
+        - any:
+            - db-primary
+            - db-replica
+        - retry: {of: payments, attempts: 3}

@@ -1,0 +1,27 @@
+flowchart TD
+  svc(["bridge"])
+  op1{{"any of"}}
+  op2{{"all of"}}
+  c_A["A<br/>90%"]
+  c_D["D<br/>90%"]
+  op3{{"all of"}}
+  c_B["B<br/>90%"]
+  c_E["E<br/>90%"]
+  op4{{"all of"}}
+  c_C["C<br/>90%"]
+  op5{{"all of"}}
+  op2 --> c_A
+  op2 --> c_D
+  op1 --> op2
+  op3 --> c_B
+  op3 --> c_E
+  op1 --> op3
+  op4 --> c_A
+  op4 --> c_C
+  op4 --> c_E
+  op1 --> op4
+  op5 --> c_B
+  op5 --> c_C
+  op5 --> c_D
+  op1 --> op5
+  svc --> op1

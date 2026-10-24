@@ -1,0 +1,18 @@
+media-api works 99.259% of the time because:
+
+- ALL of these must work: 99.259%
+  - self works: 99.99%
+  - authn works: 99.95%
+  - billing works, trying up to 3 times: 99.95%
+  - AT LEAST 2 of these 3 must work: 99.9897%
+    (shared components: cdn-plane. The parts below are not independent, so this is the exact value, not a product of them.)
+    - cdn-a works (and so does cdn-plane, which it depends on): 99.89%
+    - cdn-b works (and so does cdn-plane, which it depends on): 99.89%
+    - cdn-c works: 99.90%
+  - served from cache (90% of requests), OR the origin works: 99.99%
+    - origin works: 99.90%
+  - only needed by 20% of requests; otherwise it does not matter: 99.80%
+    - search works: 99.00%
+  - the first works, OR the second works and can serve the request (it can serve 60% of requests): 99.588%
+    - recs works: 99.00%
+    - legacy works: 98.00%
