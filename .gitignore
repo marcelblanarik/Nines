@@ -7,3 +7,4 @@ node_modules/
 web/dist/
 web/public/nines.wasm
 web/public/wasm_exec.js
+.impeccable
