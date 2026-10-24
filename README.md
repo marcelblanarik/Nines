@@ -12,6 +12,8 @@ availability, and `nines` tells you:
 It is a Go library and CLI, with the same core compiled to WebAssembly for a static web app (`web/`, nothing leaves
 the browser).
 
+![The nines web app: a title, an upload card, a form to build a model by hand, and example buttons](docs/homepage.png)
+
 ## Why not just multiply percentages?
 
 Multiplying down the tree double-counts any component that appears in more than one place. `nines` compiles the model
