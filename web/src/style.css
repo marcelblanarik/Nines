@@ -125,7 +125,7 @@ svg {
 .intro {
   padding: 56px 20px 12px;
   text-align: center;
-  background: radial-gradient(60% 120% at 50% 0%, var(--accent-soft), transparent 70%);
+  background: radial-gradient(60% 120% at 50% 0%, var(--accent-soft), var(--bg) 70%);
 }
 
 .intro h1 {
@@ -778,6 +778,11 @@ textarea {
   border-radius: var(--radius-sm);
   font: 400 12.5px/1.6 var(--mono);
   tab-size: 2;
+}
+
+::placeholder {
+  color: var(--muted);
+  opacity: 1; /* Firefox dims placeholders; the muted colour already clears 4.5:1 */
 }
 
 textarea.invalid {
