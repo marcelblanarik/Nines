@@ -1,9 +1,9 @@
 # nines
 
-> ### [Try it in your browser →](https://marcelblanarik.github.io/Nines/)
->
-> Upload a model or build one by hand and see the availability you can promise. No install, and your model is never
-> uploaded.
+### [Try it in your browser →](https://marcelblanarik.github.io/Nines/)
+
+Upload a model or build one by hand and see the availability you can promise. No install, and your model is never
+uploaded.
 
 A dependency-aware SLO calculator. Describe a service as a graph of components and dependencies, give each an
 availability, and `nines` tells you:
