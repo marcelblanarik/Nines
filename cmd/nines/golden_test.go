@@ -43,10 +43,15 @@ func golden(t *testing.T, name, got string) {
 	require.Equal(t, string(want), got)
 }
 
-// floatTolerance is the relative difference under which two JSON numbers count as the same. The last digits of a float
-// depend on the CPU (Apple silicon fuses multiply-add, the CI runners do not), so full-precision JSON cannot be compared
-// byte for byte. The text and markdown outputs round to a few digits and are still compared exactly.
-const floatTolerance = 1e-9
+// Two JSON numbers count as the same when they differ by less than absTolerance or by less than floatTolerance of
+// their size. The last digits of a float depend on the CPU (Apple silicon fuses multiply-add, the CI runners do not),
+// so full-precision JSON cannot be compared byte for byte; and a gain is the difference of two nearly equal
+// probabilities, so its noise is absolute (about 1e-16), not relative. The text and markdown outputs round to a few
+// digits and are still compared exactly.
+const (
+	absTolerance   = 1e-12
+	floatTolerance = 1e-9
+)
 
 // requireJSONClose compares two JSON documents: everything must be equal except numbers, which may differ by floatTolerance.
 func requireJSONClose(t *testing.T, want, got []byte) {
@@ -79,7 +84,8 @@ func requireClose(t *testing.T, want, got any, path string) {
 	case float64:
 		g, ok := got.(float64)
 		require.True(t, ok, "%s: want a number, got %T", path, got)
-		require.LessOrEqual(t, math.Abs(w-g), floatTolerance*math.Max(math.Abs(w), math.Abs(g)), "%s: %v != %v", path, w, g)
+		tolerance := math.Max(absTolerance, floatTolerance*math.Max(math.Abs(w), math.Abs(g)))
+		require.LessOrEqual(t, math.Abs(w-g), tolerance, "%s: %v != %v", path, w, g)
 	default:
 		require.Equal(t, want, got, path)
 	}

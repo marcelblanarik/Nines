@@ -11,8 +11,8 @@ orders-api
 Biggest levers (gain if made perfect):
   1. gateway              99.945%  +0.0550 pp  (23.8 min less downtime / 30d)
   2. payments             99.90%  +0.0200 pp  (8.6 min less downtime / 30d)
-  3. self                 99.99%  +0.0100 pp  (4.3 min less downtime / 30d)
-  4. auth                 99.99%  +0.0100 pp  (4.3 min less downtime / 30d)
+  3. auth                 99.99%  +0.0100 pp  (4.3 min less downtime / 30d)
+  4. self                 99.99%  +0.0100 pp  (4.3 min less downtime / 30d)
   5. db-primary           99.95%  +0.0000 pp  (0.01 min less downtime / 30d)
 
 Single points of failure: payments, gateway, self, auth

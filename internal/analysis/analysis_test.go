@@ -239,6 +239,17 @@ func TestExplainSharedMarker(t *testing.T) {
 	require.InDelta(t, 0.891, anyNode.Children[0].Probability, 1e-12)
 }
 
+// Symmetric components get the same gain, but its leading digits differ between CPUs. These are the values the Mac
+// produced for cdn-a and for cdn-b/cdn-c in testdata/models/operators.yaml: they must count as a tie, so that the
+// component name decides the order on every machine.
+func TestSameGainIgnoresRounding(t *testing.T) {
+	require.True(t, sameGain(1.9832081487036746e-6, 1.9832081485926523e-6))
+	require.True(t, sameGain(2.9966013548321513e-7, 2.996601353721928e-7))
+	require.True(t, sameGain(0, 0))
+	require.False(t, sameGain(1.0e-4, 1.001e-4), "a real difference is not a tie")
+	require.False(t, sameGain(0, 1e-9))
+}
+
 func TestNaiveComparison(t *testing.T) {
 	r, err := Check(parse(t, sharedDB), Options{})
 	require.NoError(t, err)

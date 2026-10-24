@@ -54,6 +54,13 @@
       "improvement_potential": 0.00009926929645431848
     },
     {
+      "component": "origin",
+      "availability": 0.9990000000000001,
+      "owned": false,
+      "importance": 0.0992692964543278,
+      "improvement_potential": 0.00009926929645420746
+    },
+    {
       "component": "self",
       "availability": 0.9998999999999999,
       "owned": true,
@@ -61,11 +68,11 @@
       "improvement_potential": 0.00009926929645431848
     },
     {
-      "component": "origin",
+      "component": "cdn-a",
       "availability": 0.9990000000000001,
       "owned": false,
-      "importance": 0.0992692964543278,
-      "improvement_potential": 0.00009926929645420746
+      "importance": 0.001983208148760851,
+      "improvement_potential": 0.0000019832081485926523
     },
     {
       "component": "cdn-b",
@@ -80,13 +87,6 @@
       "owned": false,
       "importance": 0.001983208148760851,
       "improvement_potential": 0.0000019832081487036746
-    },
-    {
-      "component": "cdn-a",
-      "availability": 0.9990000000000001,
-      "owned": false,
-      "importance": 0.001983208148760851,
-      "improvement_potential": 0.0000019832081485926523
     }
   ],
   "spofs": [

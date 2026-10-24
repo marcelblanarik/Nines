@@ -26,18 +26,18 @@
       "improvement_potential": 0.00019985046388537597
     },
     {
-      "component": "self",
-      "availability": 0.9998999999999999,
-      "owned": true,
-      "importance": 0.9991498248430081,
-      "improvement_potential": 0.00009991498248429487
-    },
-    {
       "component": "auth",
       "availability": 0.9999,
       "owned": false,
       "importance": 0.999149824843008,
       "improvement_potential": 0.00009991498248418385
+    },
+    {
+      "component": "self",
+      "availability": 0.9998999999999999,
+      "owned": true,
+      "importance": 0.9991498248430081,
+      "improvement_potential": 0.00009991498248429487
     },
     {
       "component": "db-primary",

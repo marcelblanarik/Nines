@@ -4,6 +4,7 @@ package analysis
 import (
 	"errors"
 	"fmt"
+	"math"
 	"sort"
 
 	"github.com/marcelblanarik/nines/internal/bdd"
@@ -178,12 +179,23 @@ func levers(m *model.Model, c *compile.Compiled, e *eval.Engine, probs []float64
 		})
 	}
 	sort.SliceStable(out, func(i, j int) bool {
-		if out[i].ImprovementPotential != out[j].ImprovementPotential {
+		if !sameGain(out[i].ImprovementPotential, out[j].ImprovementPotential) {
 			return out[i].ImprovementPotential > out[j].ImprovementPotential
 		}
 		return out[i].Component < out[j].Component
 	})
 	return out
+}
+
+// gainTolerance is the difference, in availability, under which two improvement potentials count as equal (1e-12 is
+// under a millionth of a second of downtime a month). Symmetric components get the same gain, but a gain is the
+// difference of two nearly equal probabilities, so the rounding noise of the CPU (Apple silicon fuses multiply-add,
+// Linux runners do not) shows up in its leading digits. An exact comparison would order tied components differently
+// on different machines. The tolerance is absolute because that noise is: about 1e-16 on every probability.
+const gainTolerance = 1e-12
+
+func sameGain(a, b float64) bool {
+	return math.Abs(a-b) <= gainTolerance
 }
 
 // cutSets finds single points of failure and, for up to 60 components, the order-2 cut sets.
